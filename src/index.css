@@ -1,0 +1,95 @@
+@import "tailwindcss";
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/inter";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Inter Variable", ui-sans-serif, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-paper: #f6f5ef;
+  --color-paper-2: #efeee6;
+  --color-card: #ffffff;
+  --color-ink: #15140f;
+  --color-ink-2: #3b3a33;
+  --color-muted: #6f6d62;
+  --color-faint: #9c9a8e;
+  --color-line: #e3e1d6;
+  --color-line-2: #d4d1c3;
+  --color-marker: #d3f36a;
+  --color-marker-soft: #ecfab8;
+  --color-moss: #3f5a12;
+  --color-amber-ink: #8a4b06;
+  --color-amber-soft: #fdf1d6;
+  --color-rose-ink: #9f1d2c;
+  --color-rose-soft: #fde8ea;
+
+  --shadow-card: 0 1px 0 rgb(21 20 15 / 0.04), 0 1px 2px rgb(21 20 15 / 0.06);
+  --shadow-lift: 0 1px 0 rgb(21 20 15 / 0.04), 0 12px 32px -12px rgb(21 20 15 / 0.18);
+
+  --animate-rise: rise 0.38s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  --animate-toast: toast 0.24s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+  @keyframes toast {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-paper text-ink font-sans;
+    font-feature-settings: "cv11", "ss01";
+  }
+  ::selection {
+    background: var(--color-marker);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Trait de surligneur derrière un fragment de texte. */
+  .mark {
+    background-image: linear-gradient(transparent 52%, var(--color-marker) 52%, var(--color-marker) 92%, transparent 92%);
+    padding: 0 0.12em;
+    margin: 0 -0.06em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .grain {
+    background-image: radial-gradient(rgb(21 20 15 / 0.05) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+  .skeleton {
+    background: linear-gradient(90deg, var(--color-paper-2) 25%, #f9f8f3 50%, var(--color-paper-2) 75%);
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+  }
+}
