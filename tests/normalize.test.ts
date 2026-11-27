@@ -130,7 +130,7 @@ describe("responsables ambigus ou inventés", () => {
   });
 
   it("retire un responsable absent du texte", () => {
-    const [task] = run([raw({ owner: "Jean-Pierre" })]).tasks;
+    const [task] = run([raw({ owner: "Bertrand" })]).tasks;
     expect(task!.owner).toBeNull();
     expect(task!.confirmationReasons.join()).toMatch(/absent du texte/i);
   });
